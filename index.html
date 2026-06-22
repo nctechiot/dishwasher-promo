@@ -20,7 +20,7 @@
     background: rgba(13,27,42,0.95); backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(245,166,35,0.2);
   }
-  .logo-img { height: 38px; width: 38px; border-radius: 7px; object-fit: cover; }
+  .logo-text { font-size: 22px; font-weight: 900; letter-spacing: 0.08em; color: var(--white); font-family: "Inter", sans-serif; } .logo-text span { color: var(--amber); }
   .lang-toggle { display: flex; background: rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.15); }
   .lang-btn { padding: 6px 18px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; background: transparent; color: rgba(255,255,255,0.55); transition: all 0.2s; letter-spacing: 0.05em; }
   .lang-btn.active { background: var(--amber); color: var(--navy); }
@@ -116,7 +116,7 @@
 
 <!-- NAV -->
 <div class="lang-bar">
-  <img src="Untitled_design.jpg" alt="NCTECH" class="logo-img">
+  <div class="logo-text">NC<span>TECH</span></div>
   <div class="lang-toggle">
     <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
     <button class="lang-btn" onclick="setLang('bm')" id="btn-bm">BM</button>
