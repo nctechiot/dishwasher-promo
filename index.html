@@ -350,14 +350,11 @@ async function handleSubmit() {
   btn.textContent = c.submitting;
 
   try {
-    if (SHEET_URL !== 'https://script.google.com/macros/s/AKfycbxff5cKbHEMTJdyE7hyhzm7mb9TAfFa4AWDKm-7HeiN_EeJJGRpfcsfi0GPwRtROKo3/exec') {
-      await fetch(SHEET_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, company, phone, email })
-      });
-    }
+    const params = new URLSearchParams({ name, company, phone, email });
+    await fetch(SHEET_URL + '?' + params.toString(), {
+      method: 'GET',
+      mode: 'no-cors'
+    });
   } catch(e) { console.log('Sheet error:', e); }
 
   document.getElementById('form-card').style.display = 'none';
