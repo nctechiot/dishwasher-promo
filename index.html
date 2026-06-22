@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NCTECH Dishwasher Rental Promo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0D1B2A; --navy-mid: #162235; --amber: #F5A623; --amber-dark: #D4891A;
+    --white: #FFFFFF; --grey-light: #F2F4F7; --grey-text: #6B7280; --success: #22C55E; --red: #EF4444;
+  }
+  body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--white); min-height: 100vh; }
+
+  /* NAV */
+  .lang-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center; padding: 10px 24px;
+    background: rgba(13,27,42,0.95); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(245,166,35,0.2);
+  }
+  .logo-img { height: 38px; width: 38px; border-radius: 7px; object-fit: cover; }
+  .lang-toggle { display: flex; background: rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.15); }
+  .lang-btn { padding: 6px 18px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; background: transparent; color: rgba(255,255,255,0.55); transition: all 0.2s; letter-spacing: 0.05em; }
+  .lang-btn.active { background: var(--amber); color: var(--navy); }
+
+  /* HERO */
+  .hero { padding: 104px 24px 56px; text-align: center; max-width: 680px; margin: 0 auto; }
+  .badge { display: inline-block; background: rgba(245,166,35,0.15); border: 1px solid rgba(245,166,35,0.4); color: var(--amber); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 16px; border-radius: 100px; margin-bottom: 24px; }
+  .hero h1 { font-size: clamp(32px, 6vw, 52px); font-weight: 900; line-height: 1.1; margin-bottom: 16px; letter-spacing: -0.02em; }
+  .hero h1 span { color: var(--amber); }
+  .hero p { font-size: 17px; color: rgba(255,255,255,0.65); line-height: 1.6; }
+
+  /* PRICING */
+  .pricing-section { max-width: 680px; margin: 0 auto 56px; padding: 0 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .price-card { background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 28px 24px; text-align: center; position: relative; }
+  .price-card.featured { border-color: var(--amber); background: linear-gradient(145deg, #1e2f42, #162235); }
+  .price-card .label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 12px; }
+  .price-card.featured .label { color: var(--amber); }
+  .price-amount { font-size: 42px; font-weight: 900; letter-spacing: -0.03em; line-height: 1; }
+  .price-card.featured .price-amount { color: var(--amber); }
+  .price-sub { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 6px; }
+  .featured-pill { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--amber); color: var(--navy); font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 14px; border-radius: 100px; white-space: nowrap; }
+  .strikethrough { text-decoration: line-through; color: rgba(255,255,255,0.35); font-size: 13px; margin-top: 4px; }
+
+  /* SAVINGS */
+  .savings-section { max-width: 680px; margin: 0 auto 56px; padding: 0 24px; }
+  .savings-box { background: linear-gradient(135deg, #1a3a1a, #0f2a0f); border: 1px solid rgba(34,197,94,0.3); border-radius: 20px; padding: 36px 32px; text-align: center; }
+  .savings-label { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--success); margin-bottom: 12px; }
+  .savings-amount { font-size: clamp(48px, 10vw, 72px); font-weight: 900; color: var(--success); letter-spacing: -0.04em; line-height: 1; margin-bottom: 8px; }
+  .savings-desc { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+  .savings-breakdown { display: flex; justify-content: center; gap: 32px; margin-top: 28px; flex-wrap: wrap; }
+  .breakdown-item { text-align: center; }
+  .breakdown-num { font-size: 22px; font-weight: 800; color: var(--white); }
+  .breakdown-lbl { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 2px; }
+  .divider-line { width: 1px; background: rgba(255,255,255,0.15); align-self: stretch; }
+
+  /* FEATURES */
+  .features-section { max-width: 680px; margin: 0 auto 56px; padding: 0 24px; }
+  .section-title { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); margin-bottom: 20px; text-align: center; }
+  .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .feature-item { background: var(--navy-mid); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px 18px; display: flex; align-items: flex-start; gap: 12px; }
+  .feat-icon { width: 32px; height: 32px; background: rgba(245,166,35,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .feat-text { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.8); line-height: 1.4; }
+
+  /* WHATSAPP */
+  .wa-section { max-width: 680px; margin: 0 auto 48px; padding: 0 24px; text-align: center; }
+  .wa-hint { font-size: 14px; color: rgba(255,255,255,0.45); margin-bottom: 14px; }
+  .wa-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #25D366; color: white; font-size: 16px; font-weight: 700;
+    padding: 14px 28px; border-radius: 12px; text-decoration: none;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .wa-btn:hover { background: #1ebe5a; }
+  .wa-btn:active { transform: scale(0.98); }
+  .wa-icon { width: 22px; height: 22px; fill: white; flex-shrink: 0; }
+
+  /* FORM */
+  .form-section { max-width: 580px; margin: 0 auto 80px; padding: 0 24px; }
+  .form-card { background: var(--white); border-radius: 24px; padding: 40px 36px; color: var(--navy); }
+  .form-title { font-size: 22px; font-weight: 800; margin-bottom: 6px; color: var(--navy); }
+  .form-sub { font-size: 14px; color: var(--grey-text); margin-bottom: 28px; line-height: 1.5; }
+  .field-group { margin-bottom: 18px; }
+  .field-group label { display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px; }
+  .field-group input { width: 100%; padding: 13px 16px; border: 1.5px solid #E5E7EB; border-radius: 10px; font-size: 15px; font-family: 'Inter', sans-serif; color: var(--navy); background: var(--grey-light); transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
+  .field-group input:focus { border-color: var(--amber); box-shadow: 0 0 0 3px rgba(245,166,35,0.15); background: white; }
+  .field-group input.error { border-color: var(--red); }
+  .error-msg { font-size: 12px; color: var(--red); margin-top: 4px; display: none; }
+  .error-msg.show { display: block; }
+  .submit-btn { width: 100%; padding: 16px; background: var(--amber); color: var(--navy); font-size: 16px; font-weight: 800; border: none; border-radius: 12px; cursor: pointer; margin-top: 8px; transition: background 0.2s, transform 0.1s; }
+  .submit-btn:hover { background: var(--amber-dark); }
+  .submit-btn:active { transform: scale(0.98); }
+  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  /* SUCCESS */
+  .success-card { background: var(--white); border-radius: 24px; padding: 48px 36px; text-align: center; color: var(--navy); display: none; }
+  .success-card.show { display: block; }
+  .success-icon { width: 72px; height: 72px; background: rgba(34,197,94,0.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 32px; }
+  .success-title { font-size: 22px; font-weight: 900; margin-bottom: 12px; color: var(--navy); line-height: 1.3; }
+  .success-name { color: #D4891A; }
+  .success-msg { font-size: 15px; color: var(--grey-text); line-height: 1.6; }
+
+  footer { text-align: center; padding: 24px; font-size: 13px; color: rgba(255,255,255,0.3); border-top: 1px solid rgba(255,255,255,0.07); }
+  footer span { color: var(--amber); }
+
+  @media (max-width: 480px) {
+    .pricing-section, .features-grid { grid-template-columns: 1fr; }
+    .savings-breakdown { gap: 20px; }
+    .form-card, .success-card { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="lang-bar">
+  <img src="Untitled_design.jpg" alt="NCTECH" class="logo-img">
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+    <button class="lang-btn" onclick="setLang('bm')" id="btn-bm">BM</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge" id="badge">🎉 Limited Time Promotion</div>
+  <h1 id="hero-title">Rent a <span>Dishwasher</span><br>Save More Every Month</h1>
+  <p id="hero-sub">Join our membership plan and save RM1,800 over 3 years. Professional-grade dishwasher with full service included — zero hassle, zero downtime.</p>
+</div>
+
+<!-- PRICING -->
+<div class="pricing-section">
+  <div class="price-card">
+    <div class="label" id="normal-label">Normal Price</div>
+    <div class="price-amount">RM499</div>
+    <div class="price-sub" id="per-month-1">/month</div>
+  </div>
+  <div class="price-card featured">
+    <div class="featured-pill" id="member-pill">Member Price</div>
+    <div class="label" id="member-label">Membership Plan</div>
+    <div class="price-amount">RM449</div>
+    <div class="price-sub" id="per-month-2">/month</div>
+    <div class="strikethrough" id="was-text">Was RM499/month</div>
+  </div>
+</div>
+
+<!-- SAVINGS -->
+<div class="savings-section">
+  <div class="savings-box">
+    <div class="savings-label" id="save-label">You Save With Membership</div>
+    <div class="savings-amount">RM1,800</div>
+    <div class="savings-desc" id="save-desc">Over 36 months with the 3-year membership plan</div>
+    <div class="savings-breakdown">
+      <div class="breakdown-item"><div class="breakdown-num">RM50</div><div class="breakdown-lbl" id="save-monthly">Saved per month</div></div>
+      <div class="divider-line"></div>
+      <div class="breakdown-item"><div class="breakdown-num">36</div><div class="breakdown-lbl" id="contract-months">Months contract</div></div>
+      <div class="divider-line"></div>
+      <div class="breakdown-item"><div class="breakdown-num">RM1,800</div><div class="breakdown-lbl" id="total-save">Total savings</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div class="features-section">
+  <div class="section-title" id="includes-title">What's Included</div>
+  <div class="features-grid">
+    <div class="feature-item"><div class="feat-icon">🚚</div><div class="feat-text" id="f1">Free delivery & installation</div></div>
+    <div class="feature-item"><div class="feat-icon">🔧</div><div class="feat-text" id="f2">Service every 4 months</div></div>
+    <div class="feature-item"><div class="feat-icon">🛡️</div><div class="feat-text" id="f3">3-year warranty included</div></div>
+    <div class="feature-item"><div class="feat-icon">🧴</div><div class="feat-text" id="f4">Monthly detergent & rinse aid (20L)</div></div>
+    <div class="feature-item"><div class="feat-icon">📞</div><div class="feat-text" id="f5">Dedicated support team</div></div>
+    <div class="feature-item"><div class="feat-icon">✅</div><div class="feat-text" id="f6">No hidden charges</div></div>
+  </div>
+</div>
+
+<!-- WHATSAPP -->
+<div class="wa-section">
+  <p class="wa-hint" id="wa-hint">Prefer to chat first? Reach us directly</p>
+  <a href="https://wa.me/601112640563" target="_blank" class="wa-btn" id="wa-btn">
+    <svg class="wa-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span id="wa-text">Chat on WhatsApp</span>
+  </a>
+</div>
+
+<!-- FORM -->
+<div class="form-section">
+  <div class="form-card" id="form-card">
+    <div class="form-title" id="form-title">Reserve Your Slot Now</div>
+    <div class="form-sub" id="form-sub">Limited membership slots available. Fill in your details and our sales team will contact you shortly.</div>
+    <div class="field-group">
+      <label id="label-name">Full Name</label>
+      <input type="text" id="input-name" placeholder="e.g. Ahmad bin Ali">
+      <div class="error-msg" id="err-name">Please enter your name.</div>
+    </div>
+    <div class="field-group">
+      <label id="label-company">Company Name</label>
+      <input type="text" id="input-company" placeholder="e.g. Restoran Maju Jaya">
+      <div class="error-msg" id="err-company">Please enter your company name.</div>
+    </div>
+    <div class="field-group">
+      <label id="label-phone">Phone Number</label>
+      <input type="tel" id="input-phone" placeholder="e.g. 012-3456789">
+      <div class="error-msg" id="err-phone">Please enter a valid phone number.</div>
+    </div>
+    <div class="field-group">
+      <label id="label-email">Email Address</label>
+      <input type="email" id="input-email" placeholder="e.g. ahmad@company.com">
+      <div class="error-msg" id="err-email">Please enter a valid email address.</div>
+    </div>
+    <button class="submit-btn" onclick="handleSubmit()" id="submit-btn">Reserve My Membership Slot →</button>
+  </div>
+
+  <div class="success-card" id="success-card">
+    <div class="success-icon">✅</div>
+    <div class="success-title" id="success-title-text"></div>
+    <div class="success-msg" id="success-msg-text"></div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 <span>NCTECH IOT SDN BHD</span> · nctech.com.my · All rights reserved.</p>
+</footer>
+
+<script>
+// ← PASTE YOUR APPS SCRIPT WEB APP URL HERE AFTER DEPLOYING
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyJl7pwh7TnU6IVAYgls7nJl_Yj8FNToovn2oO2W8XnCaHP-wiuo_DUwJsiUfSDQoEA/exec';
+
+const copy = {
+  en: {
+    badge: "🎉 Limited Time Promotion",
+    heroTitle: 'Rent a <span>Dishwasher</span><br>Save More Every Month',
+    heroSub: "Join our membership plan and save RM1,800 over 3 years. Professional-grade dishwasher with full service included — zero hassle, zero downtime.",
+    normalLabel: "Normal Price", memberLabel: "Membership Plan", memberPill: "Member Price",
+    perMonth: "/month", wasText: "Was RM499/month",
+    saveLabel: "You Save With Membership", saveDesc: "Over 36 months with the 3-year membership plan",
+    saveMonthly: "Saved per month", contractMonths: "Months contract", totalSave: "Total savings",
+    includesTitle: "What's Included",
+    f1:"Free delivery & installation", f2:"Service every 4 months", f3:"3-year warranty included",
+    f4:"Monthly detergent & rinse aid (20L)", f5:"Dedicated support team", f6:"No hidden charges",
+    waHint: "Prefer to chat first? Reach us directly",
+    waText: "Chat on WhatsApp",
+    formTitle: "Reserve Your Slot Now",
+    formSub: "Limited membership slots available. Fill in your details and our sales team will contact you shortly.",
+    labelName:"Full Name", labelCompany:"Company Name", labelPhone:"Phone Number", labelEmail:"Email Address",
+    placeholderName:"e.g. Ahmad bin Ali", placeholderCompany:"e.g. Restoran Maju Jaya",
+    placeholderPhone:"e.g. 012-3456789", placeholderEmail:"e.g. ahmad@company.com",
+    submitBtn:"Reserve My Membership Slot →",
+    errName:"Please enter your name.", errCompany:"Please enter your company name.",
+    errPhone:"Please enter a valid phone number.", errEmail:"Please enter a valid email address.",
+    submitting: "Submitting...",
+    successTitle: (n) => `Promotion Package Has Been Reserved for <span class="success-name">"${n}"</span> 🎉`,
+    successMsg: "Our sales team will contact you shortly to confirm your membership package details. Thank you for choosing NCTECH!"
+  },
+  bm: {
+    badge: "🎉 Promosi Terhad",
+    heroTitle: 'Sewa <span>Mesin Basuh Pinggan</span><br>Jimat Lebih Setiap Bulan',
+    heroSub: "Sertai pelan keahlian kami dan jimat RM1,800 dalam 3 tahun. Mesin basuh pinggan gred profesional lengkap dengan servis penuh — tiada kerumitan, tiada gangguan.",
+    normalLabel:"Harga Biasa", memberLabel:"Pelan Keahlian", memberPill:"Harga Ahli",
+    perMonth:"/bulan", wasText:"Dahulu RM499/bulan",
+    saveLabel:"Penjimatan Dengan Keahlian", saveDesc:"Sepanjang 36 bulan dengan pelan keahlian 3 tahun",
+    saveMonthly:"Jimat setiap bulan", contractMonths:"Bulan kontrak", totalSave:"Jumlah penjimatan",
+    includesTitle:"Apa Yang Termasuk",
+    f1:"Penghantaran & pemasangan percuma", f2:"Servis setiap 4 bulan", f3:"Waranti 3 tahun termasuk",
+    f4:"Detergen & cecair bilas bulanan (20L)", f5:"Pasukan sokongan dedikasi", f6:"Tiada caj tersembunyi",
+    waHint: "Lebih suka berbual dahulu? Hubungi kami terus",
+    waText: "Chat di WhatsApp",
+    formTitle:"Tempah Slot Anda Sekarang",
+    formSub:"Slot keahlian terhad. Isi maklumat anda dan pasukan jualan kami akan menghubungi anda tidak lama lagi.",
+    labelName:"Nama Penuh", labelCompany:"Nama Syarikat", labelPhone:"Nombor Telefon", labelEmail:"Alamat E-mel",
+    placeholderName:"cth. Ahmad bin Ali", placeholderCompany:"cth. Restoran Maju Jaya",
+    placeholderPhone:"cth. 012-3456789", placeholderEmail:"cth. ahmad@syarikat.com",
+    submitBtn:"Tempah Slot Keahlian Saya →",
+    errName:"Sila masukkan nama anda.", errCompany:"Sila masukkan nama syarikat anda.",
+    errPhone:"Sila masukkan nombor telefon yang sah.", errEmail:"Sila masukkan alamat e-mel yang sah.",
+    submitting: "Menghantar...",
+    successTitle: (n) => `Pakej Promosi Telah Ditempah Untuk <span class="success-name">"${n}"</span> 🎉`,
+    successMsg: "Pasukan jualan kami akan menghubungi anda tidak lama lagi untuk mengesahkan butiran pakej keahlian anda. Terima kasih kerana memilih NCTECH!"
+  }
+};
+
+let lang = 'en';
+
+function setLang(l) {
+  lang = l;
+  document.getElementById('btn-en').classList.toggle('active', l === 'en');
+  document.getElementById('btn-bm').classList.toggle('active', l === 'bm');
+  const c = copy[l];
+  document.getElementById('badge').textContent = c.badge;
+  document.getElementById('hero-title').innerHTML = c.heroTitle;
+  document.getElementById('hero-sub').textContent = c.heroSub;
+  document.getElementById('normal-label').textContent = c.normalLabel;
+  document.getElementById('member-label').textContent = c.memberLabel;
+  document.getElementById('member-pill').textContent = c.memberPill;
+  document.getElementById('per-month-1').textContent = c.perMonth;
+  document.getElementById('per-month-2').textContent = c.perMonth;
+  document.getElementById('was-text').textContent = c.wasText;
+  document.getElementById('save-label').textContent = c.saveLabel;
+  document.getElementById('save-desc').textContent = c.saveDesc;
+  document.getElementById('save-monthly').textContent = c.saveMonthly;
+  document.getElementById('contract-months').textContent = c.contractMonths;
+  document.getElementById('total-save').textContent = c.totalSave;
+  document.getElementById('includes-title').textContent = c.includesTitle;
+  ['f1','f2','f3','f4','f5','f6'].forEach(id => document.getElementById(id).textContent = c[id]);
+  document.getElementById('wa-hint').textContent = c.waHint;
+  document.getElementById('wa-text').textContent = c.waText;
+  document.getElementById('form-title').textContent = c.formTitle;
+  document.getElementById('form-sub').textContent = c.formSub;
+  document.getElementById('label-name').textContent = c.labelName;
+  document.getElementById('label-company').textContent = c.labelCompany;
+  document.getElementById('label-phone').textContent = c.labelPhone;
+  document.getElementById('label-email').textContent = c.labelEmail;
+  document.getElementById('input-name').placeholder = c.placeholderName;
+  document.getElementById('input-company').placeholder = c.placeholderCompany;
+  document.getElementById('input-phone').placeholder = c.placeholderPhone;
+  document.getElementById('input-email').placeholder = c.placeholderEmail;
+  document.getElementById('submit-btn').textContent = c.submitBtn;
+  document.getElementById('err-name').textContent = c.errName;
+  document.getElementById('err-company').textContent = c.errCompany;
+  document.getElementById('err-phone').textContent = c.errPhone;
+  document.getElementById('err-email').textContent = c.errEmail;
+}
+
+async function handleSubmit() {
+  const c = copy[lang];
+  const name = document.getElementById('input-name').value.trim();
+  const company = document.getElementById('input-company').value.trim();
+  const phone = document.getElementById('input-phone').value.trim();
+  const email = document.getElementById('input-email').value.trim();
+  let valid = true;
+  const fields = [
+    { val: name, errId: 'err-name', inputId: 'input-name', check: v => v.length > 1 },
+    { val: company, errId: 'err-company', inputId: 'input-company', check: v => v.length > 1 },
+    { val: phone, errId: 'err-phone', inputId: 'input-phone', check: v => /^[\d\s\-\+]{8,}$/.test(v) },
+    { val: email, errId: 'err-email', inputId: 'input-email', check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+  ];
+  fields.forEach(f => {
+    const err = document.getElementById(f.errId);
+    const inp = document.getElementById(f.inputId);
+    if (!f.check(f.val)) { err.classList.add('show'); inp.classList.add('error'); valid = false; }
+    else { err.classList.remove('show'); inp.classList.remove('error'); }
+  });
+  if (!valid) return;
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = c.submitting;
+
+  try {
+    if (SHEET_URL !== 'https://script.google.com/macros/s/AKfycbyJl7pwh7TnU6IVAYgls7nJl_Yj8FNToovn2oO2W8XnCaHP-wiuo_DUwJsiUfSDQoEA/exec') {
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, company, phone, email })
+      });
+    }
+  } catch(e) { console.log('Sheet error:', e); }
+
+  document.getElementById('form-card').style.display = 'none';
+  const sc = document.getElementById('success-card');
+  sc.classList.add('show');
+  document.getElementById('success-title-text').innerHTML = c.successTitle(name);
+  document.getElementById('success-msg-text').textContent = c.successMsg;
+  sc.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+</script>
+</body>
+</html>
